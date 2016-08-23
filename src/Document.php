@@ -23,13 +23,24 @@ AnnotationRegistry::registerLoader('class_exists');
  */
 class Document
 {
+    /**
+     * @var SerializerInterface
+     */
     private $serializer;
 
+    /**
+     * Document constructor.
+     * @param SerializerInterface $serializer
+     */
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }
 
+    /**
+     * @param LeadBag $leadBag
+     * @return string
+     */
     public function generate(LeadBag $leadBag)
     {
         return $this->serializer->serialize($leadBag, 'xml');

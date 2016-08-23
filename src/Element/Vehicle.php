@@ -10,59 +10,40 @@
 
 namespace MauroMoreno\AutoLeadDataFormat\Element;
 
-use DateTime;
-use JMS\Serializer\Annotation as JMS;
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
 
 /**
- * Class Lead
+ * Class Vehicle
  * @package MauroMoreno\AutoLeadDataFormat\Element
  * @author  Mauro Moreno <moreno.mauro.emanuel@gmail.com>
  */
-class Lead
+class Vehicle
 {
-    /**
-     * @var DateTime
-     *
-     * @JMS\SerializedName("requestdate")
-     * @JMS\Type("DateTime")
-     * @JMS\XmlElement(cdata=false)
-     */
-    private $request_date;
+    private $interest = 'buy';
 
-    /**
-     * @var string
-     *
-     * @JMS\XmlAttribute
-     */
     private $status = 'new';
 
-    private $vehicles;
-
     /**
-     * Lead constructor.
+     * @return string
      */
-    public function __construct()
+    public function getInterest(): string
     {
-        $this->request_date = new DateTime;
+        return $this->interest;
     }
 
     /**
-     * @return DateTime
-     */
-    public function getRequestDate()
-    {
-        return $this->request_date;
-    }
-
-    /**
-     * @param DateTime $request_date
+     * @param string $interest
      *
      * @return $this
      */
-    public function setRequestDate(DateTime $request_date)
+    public function setInterest(string $interest)
     {
-        $this->request_date = $request_date;
+        if (!in_array($interest, ['buy', 'lease', 'sell', 'trade-in', 'test-drive'])) {
+            throw new InvalidArgumentException(
+                'Status can only be buy, lease, sell, trade-in or test-drive.'
+            );
+        }
+        $this->interest = $interest;
         return $this;
     }
 
