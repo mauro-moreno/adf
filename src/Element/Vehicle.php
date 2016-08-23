@@ -19,8 +19,14 @@ use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
  */
 class Vehicle
 {
+    /**
+     * @var string
+     */
     private $interest = 'buy';
 
+    /**
+     * @var string
+     */
     private $status = 'new';
 
     /**
@@ -38,7 +44,8 @@ class Vehicle
      */
     public function setInterest(string $interest)
     {
-        if (!in_array($interest, ['buy', 'lease', 'sell', 'trade-in', 'test-drive'])) {
+        $interests = ['buy', 'lease', 'sell', 'trade-in', 'test-drive'];
+        if (!in_array($interest, $interests)) {
             throw new InvalidArgumentException(
                 'Status can only be buy, lease, sell, trade-in or test-drive.'
             );

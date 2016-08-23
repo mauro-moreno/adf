@@ -1,0 +1,10 @@
+MauroMoreno\AutoLeadDataFormat\Element\LeadBag:
+  access_type: public_method
+  exclusion_policy: NONE
+  properties:
+    leads:
+      type: "array<MauroMoreno\\AutoLeadDataFormat\\Element\\Lead>"
+      xml_list:
+        entry_name: prospect
+        inline: true
+  xml_root_name: adf

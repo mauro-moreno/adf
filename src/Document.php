@@ -10,11 +10,8 @@
 
 namespace MauroMoreno\AutoLeadDataFormat;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\SerializerInterface;
 use MauroMoreno\AutoLeadDataFormat\Element\LeadBag;
-
-AnnotationRegistry::registerLoader('class_exists');
 
 /**
  * Class Document

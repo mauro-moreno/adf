@@ -4,6 +4,7 @@ namespace MauroMoreno\AutoLeadDataFormat\Tests;
 
 use DateTime;
 use MauroMoreno\AutoLeadDataFormat\Element\Lead;
+use MauroMoreno\AutoLeadDataFormat\Exception\LogicException;
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
 use TypeError;
 
@@ -61,5 +62,31 @@ class LeadTest extends \PHPUnit_Framework_TestCase
             ['new'],
             ['resend'],
         ];
+    }
+
+    /**
+     * @expectedException TypeError
+     */
+    public function testVehiclesWrongType()
+    {
+        (new Lead)->setVehicles('');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Vehicles must be an array of Vehicle.
+     */
+    public function testVehiclesWrongArrayType()
+    {
+        (new Lead)->setVehicles(['', '']);
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Vehicles must contain at least a Vehicle.
+     */
+    public function testVehiclesEmptyArray()
+    {
+        (new Lead)->setVehicles([])->getVehicles();
     }
 }

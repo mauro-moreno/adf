@@ -1,0 +1,8 @@
+MauroMoreno\AutoLeadDataFormat\Element\Vehicle:
+  access_type: public_method
+  exclusion_policy: NONE
+  properties:
+    interest:
+      xml_attribute: true
+    status:
+      xml_attribute: true

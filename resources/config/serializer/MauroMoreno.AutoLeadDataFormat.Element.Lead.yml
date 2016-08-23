@@ -1,0 +1,17 @@
+MauroMoreno\AutoLeadDataFormat\Element\Lead:
+  access_type: public_method
+  exclusion_policy: NONE
+  properties:
+    request_date:
+      accessor:
+        getter: getRequestDate
+        setter: setRequestDate
+      serialized_name: requestdate
+      type: DateTime
+    status:
+      xml_attribute: true
+    vehicles:
+      type: "array<MauroMoreno\\AutoLeadDataFormat\\Element\\Vehicle>"
+      xml_list:
+        entry_name: vehicle
+        inline: true

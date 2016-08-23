@@ -12,11 +12,10 @@ namespace MauroMoreno\AutoLeadDataFormat\Element;
 
 use JMS\Serializer\Annotation as JMS;
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
+use MauroMoreno\AutoLeadDataFormat\Exception\LogicException;
 
 /**
  * Class LeadBag
- * @JMS\ExclusionPolicy("none")
- * @JMS\XmlRoot("adf")
  * @package MauroMoreno\AutoLeadDataFormat\Element
  * @author  Mauro Moreno <moreno.mauro.emanuel@gmail.com>
  */
@@ -24,9 +23,6 @@ class LeadBag
 {
     /**
      * @var Lead[]
-     *
-     * @JMS\Type("array<MauroMoreno\AutoLeadDataFormat\Element\Lead>")
-     * @JMS\XmlList(inline = true, entry = "prospect")
      */
     private $leads;
 
@@ -35,11 +31,16 @@ class LeadBag
      */
     public function getLeads(): array
     {
+        if (count($this->leads) === 0) {
+            throw new LogicException(
+                'Leads must contain at least one Lead.'
+            );
+        }
         return $this->leads;
     }
 
     /**
-     * @param array $leads
+     * @param Lead[] $leads
      *
      * @return $this
      */
@@ -48,7 +49,7 @@ class LeadBag
         foreach ($leads as $lead) {
             if (!$lead instanceof Lead) {
                 throw new InvalidArgumentException(
-                    'Leads should be an array of Lead.'
+                    'Leads must be an array of Lead.'
                 );
             }
         }

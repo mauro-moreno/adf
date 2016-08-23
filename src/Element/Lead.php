@@ -11,8 +11,8 @@
 namespace MauroMoreno\AutoLeadDataFormat\Element;
 
 use DateTime;
-use JMS\Serializer\Annotation as JMS;
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
+use MauroMoreno\AutoLeadDataFormat\Exception\LogicException;
 
 /**
  * Class Lead
@@ -23,35 +23,27 @@ class Lead
 {
     /**
      * @var DateTime
-     *
-     * @JMS\SerializedName("requestdate")
-     * @JMS\Type("DateTime")
-     * @JMS\XmlElement(cdata=false)
      */
     private $request_date;
 
     /**
      * @var string
-     *
-     * @JMS\XmlAttribute
      */
     private $status = 'new';
 
-    private $vehicles;
-
     /**
-     * Lead constructor.
+     * @var Vehicle[]
      */
-    public function __construct()
-    {
-        $this->request_date = new DateTime;
-    }
+    private $vehicles = [];
 
     /**
      * @return DateTime
      */
     public function getRequestDate()
     {
+        if (empty($this->request_date)) {
+            $this->request_date = new DateTime;
+        }
         return $this->request_date;
     }
 
@@ -87,6 +79,37 @@ class Lead
             );
         }
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return Vehicle[]
+     */
+    public function getVehicles(): array
+    {
+        if (count($this->vehicles) === 0) {
+            throw new LogicException(
+                'Vehicles must contain at least a Vehicle.'
+            );
+        }
+        return $this->vehicles;
+    }
+
+    /**
+     * @param Vehicle[] $vehicles
+     *
+     * @return $this
+     */
+    public function setVehicles(array $vehicles)
+    {
+        foreach ($vehicles as $vehicle) {
+            if (!$vehicle instanceof Vehicle) {
+                throw new InvalidArgumentException(
+                    'Vehicles must be an array of Vehicle.'
+                );
+            }
+        }
+        $this->vehicles = $vehicles;
         return $this;
     }
 }
