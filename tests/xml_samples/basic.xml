@@ -2,6 +2,10 @@
 <adf>
   <prospect status="new">
     <requestdate>2016-01-01T00:00:00+0000</requestdate>
-    <vehicle interest="buy" status="new" />
+    <vehicle interest="buy" status="new">
+      <make>Test make</make>
+      <model>Test model</model>
+      <year>2016</year>
+    </vehicle>
   </prospect>
 </adf>

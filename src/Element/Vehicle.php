@@ -11,6 +11,7 @@
 namespace MauroMoreno\AutoLeadDataFormat\Element;
 
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
+use MauroMoreno\AutoLeadDataFormat\Exception\LogicException;
 
 /**
  * Class Vehicle
@@ -27,7 +28,22 @@ class Vehicle
     /**
      * @var string
      */
+    private $make = '';
+
+    /**
+     * @var string
+     */
+    private $model = '';
+
+    /**
+     * @var string
+     */
     private $status = 'new';
+
+    /**
+     * @var int
+     */
+    private $year = 0;
 
     /**
      * @return string
@@ -57,6 +73,50 @@ class Vehicle
     /**
      * @return string
      */
+    public function getMake(): string
+    {
+        if (empty($this->make)) {
+            throw new LogicException('Make cannot be an empty value.');
+        }
+        return $this->make;
+    }
+
+    /**
+     * @param string $make
+     *
+     * @return $this
+     */
+    public function setMake(string $make)
+    {
+        $this->make = $make;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModel(): string
+    {
+        if (empty($this->model)) {
+            throw new LogicException('Model cannot be an empty value.');
+        }
+        return $this->model;
+    }
+
+    /**
+     * @param string $model
+     *
+     * @return $this
+     */
+    public function setModel(string $model)
+    {
+        $this->model = $model;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getStatus(): string
     {
         return $this->status;
@@ -75,6 +135,28 @@ class Vehicle
             );
         }
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear(): int
+    {
+        if (empty($this->year)) {
+            throw new LogicException('Year cannot be an empty value.');
+        }
+        return $this->year;
+    }
+
+    /**
+     * @param int $year
+     *
+     * @return $this
+     */
+    public function setYear(int $year)
+    {
+        $this->year = $year;
         return $this;
     }
 }

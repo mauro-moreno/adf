@@ -4,6 +4,7 @@ namespace MauroMoreno\AutoLeadDataFormat\Tests;
 
 use MauroMoreno\AutoLeadDataFormat\Element\Vehicle;
 use MauroMoreno\AutoLeadDataFormat\Exception\InvalidArgumentException;
+use MauroMoreno\AutoLeadDataFormat\Exception\LogicException;
 use TypeError;
 
 class VehicleTest extends \PHPUnit_Framework_TestCase
@@ -38,6 +39,54 @@ class VehicleTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException TypeError
      */
+    public function testMakeWrongType()
+    {
+        (new Vehicle)->setMake([]);
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Make cannot be an empty value.
+     */
+    public function testMakeEmptyValue()
+    {
+        (new Vehicle)->setMake('')->getMake();
+    }
+
+    public function testMakeOk()
+    {
+        $vehicle = new Vehicle;
+        $this->assertEquals($vehicle, $vehicle->setMake('Test'));
+        $this->assertEquals('Test', $vehicle->getMake());
+    }
+
+    /**
+     * @expectedException TypeError
+     */
+    public function testModelWrongType()
+    {
+        (new Vehicle)->setModel([]);
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Model cannot be an empty value.
+     */
+    public function testModelEmptyValue()
+    {
+        (new Vehicle)->setModel('')->getModel();
+    }
+
+    public function testModelOk()
+    {
+        $vehicle = new Vehicle;
+        $this->assertEquals($vehicle, $vehicle->setModel('Test'));
+        $this->assertEquals('Test', $vehicle->getModel());
+    }
+
+    /**
+     * @expectedException TypeError
+     */
     public function testStatusWrongType()
     {
         (new Vehicle)->setStatus([]);
@@ -60,6 +109,30 @@ class VehicleTest extends \PHPUnit_Framework_TestCase
         $vehicle = new Vehicle;
         $this->assertEquals($vehicle, $vehicle->setStatus($status));
         $this->assertEquals($status, $vehicle->getStatus());
+    }
+
+    /**
+     * @expectedException TypeError
+     */
+    public function testYearWrongType()
+    {
+        (new Vehicle)->setYear([]);
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Year cannot be an empty value.
+     */
+    public function testYearEmptyValue()
+    {
+        (new Vehicle)->setYear(0)->getYear();
+    }
+
+    public function testYearOk()
+    {
+        $vehicle = new Vehicle;
+        $this->assertEquals($vehicle, $vehicle->setYear(2016));
+        $this->assertEquals(2016, $vehicle->getYear());
     }
 
     public function interestOkDataProvider()

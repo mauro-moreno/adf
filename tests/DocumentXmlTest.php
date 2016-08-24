@@ -24,7 +24,10 @@ class DocumentXmlTest extends \PHPUnit_Framework_TestCase
         $xml_string = $this->document
             ->generate((new LeadBag)->setLeads([
                 (new Lead)->setVehicles([
-                    new Vehicle
+                    (new Vehicle)
+                        ->setMake('Test make')
+                        ->setModel('Test model')
+                        ->setYear(2016)
                 ])
             ]));
         $xml_object = simplexml_load_string($xml_string);
