@@ -34,7 +34,7 @@ class Lead
     /**
      * @var Vehicle[]
      */
-    private $vehicles = [];
+    private $vehicles = [ ];
 
     /**
      * @return DateTime
@@ -73,7 +73,7 @@ class Lead
      */
     public function setStatus(string $status)
     {
-        if (!in_array($status, ['new', 'resend'])) {
+        if (!in_array($status, [ 'new', 'resend' ])) {
             throw new InvalidArgumentException(
                 'Status can only be new or resend.'
             );

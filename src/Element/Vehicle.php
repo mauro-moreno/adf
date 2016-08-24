@@ -44,7 +44,7 @@ class Vehicle
      */
     public function setInterest(string $interest)
     {
-        $interests = ['buy', 'lease', 'sell', 'trade-in', 'test-drive'];
+        $interests = [ 'buy', 'lease', 'sell', 'trade-in', 'test-drive' ];
         if (!in_array($interest, $interests)) {
             throw new InvalidArgumentException(
                 'Status can only be buy, lease, sell, trade-in or test-drive.'
@@ -69,7 +69,7 @@ class Vehicle
      */
     public function setStatus(string $status)
     {
-        if (!in_array($status, ['new', 'resend'])) {
+        if (!in_array($status, [ 'new', 'resend' ])) {
             throw new InvalidArgumentException(
                 'Status can only be new or resend.'
             );
